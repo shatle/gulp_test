@@ -2,10 +2,12 @@ gulp = require('gulp')
 sass = require('gulp-ruby-sass')
 cssmin = require('gulp-cssmin')
 jsmin = require('gulp-jsmin')
+htmlmin = require('gulp-htmlmin')
 rename = require('gulp-rename')
 concat = require('gulp-concat')
 coffee = require('gulp-coffee')
 util = require('gulp-util')
+
 # 
 config = {
   "style": {
@@ -41,5 +43,8 @@ gulp.task('js', ->
 # move main html
 gulp.task('html', ->
   gulp.src(config.html.src)
+    .pipe(gulp.dest(config.html.dest))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(config.html.dest))
 )
