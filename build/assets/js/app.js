@@ -1,5 +1,5 @@
 var double;
 
 double = function(val) {
-  return val * 2;
+  return val * 4;
 };

@@ -1,2 +1,2 @@
 double = (val)->
-  return val*2
+  return val*4
