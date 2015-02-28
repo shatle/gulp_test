@@ -11,6 +11,8 @@
     "gulp-coffee":"",
     "gulp-rename":"",
     "gulp-concat":"",
-    "gulp-util":""
+    "gulp-util":"",
+    "gulp-livereload":"",
+    "gulp-connect":""
   }
 }
