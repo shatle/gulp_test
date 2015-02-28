@@ -1,6 +1,9 @@
 body {
   font-size: 18px;
 }
+body h2 {
+  color: blue;
+}
 body p {
   font-weight: bold;
 }
