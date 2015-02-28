@@ -36,7 +36,7 @@ gulp.task('style', ->
     .pipe(rename({suffix: '.min'}))
     .pipe(cssmin())
     .pipe(gulp.dest(config.style.dest))
-    .pipe connect.reload
+    .pipe connect.reload()
 )
 
 # compile coffeescript
@@ -48,7 +48,7 @@ gulp.task('js', ->
     .pipe(rename({suffix: '.min'}))
     .pipe(jsmin())
     .pipe(gulp.dest(config.js.dest))
-    # .pipe connect.reload
+    .pipe connect.reload()
 )
 # move main html
 gulp.task('html', ->
@@ -57,7 +57,7 @@ gulp.task('html', ->
     .pipe(rename({suffix: '.min'}))
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(config.html.dest))
-    # .pipe connect.reload
+    .pipe connect.reload()
 )
 # watch
 gulp.task 'watch', ()->
