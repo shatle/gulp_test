@@ -48,9 +48,9 @@ gulp.task('js', ->
   gulp.src(config.js.coffee)
     .pipe(coffee({bare: true}).on('error', util.log))
     .pipe(gulp.dest(config.js.dest))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(jsmin())
-    .pipe(gulp.dest(config.js.dest))
+    # .pipe(rename({suffix: '.min'}))
+    # .pipe(jsmin())
+    # .pipe(gulp.dest(config.js.dest))
     .pipe connect.reload()
 )
 # move main html
