@@ -5,10 +5,12 @@
   <title>Document</title>
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body>
+<body ng-app="app" ng-controller="myCtrl">
   <h2>Header</h2>
-  <p>Index</p>
+  <p>Index {{data.name}}</p>
 
+  <script src="assets/js/angular.min.js"></script>
+  <script src="assets/js/angular-ui-router.min.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

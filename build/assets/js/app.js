@@ -1,5 +1,11 @@
-var double;
+var app;
 
-double = function(val) {
-  return val * 4;
-};
+app = angular.module('app', []);
+
+app.controller('myCtrl', [
+  '$scope', function($scope) {
+    return $scope.data = {
+      name: 'text'
+    };
+  }
+]);
