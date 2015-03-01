@@ -5,12 +5,32 @@
   <title>Document</title>
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body ng-app="app" ng-controller="myCtrl">
+<body>
   <h2>Header</h2>
-  <p>Index {{data.name}}</p>
+  <div ui-view></div>
 
-  <script src="assets/js/angular.min.js"></script>
-  <script src="assets/js/angular-ui-router.min.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/require.js"></script>
+  <script>
+    require.config({
+      baseUrl: 'assets/js',
+      paths: {
+        'angular': 'angular.min',
+        'angular-ui-router': 'angular-ui-router.min',
+        'angular-couch-potato': 'angular-couch-potato'
+      },
+      shim: {
+        'angular': { exports: 'angular' },
+        'angular-ui-router': { deps: ['angular'] }
+      }
+    });
+
+    require(['app', 'angular'], function(app, angular) {
+      angular.element(document).ready(function() {
+        angular.bootstrap(document, [app['name'], function() {
+          angular.element(document).find('html').addClass('ng-app');
+        }]);
+      });
+    });
+  </script>
 </body>
 </html>
