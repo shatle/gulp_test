@@ -12,13 +12,16 @@ livereload = require 'gulp-livereload'
 connect = require 'gulp-connect'
 # 
 config = {
+  "base": 'src/base/',
   "src": "src/",
   "build": "build/",
   "style": {
+    "base": 'src/base/css/'
     "scss": "src/scss/",
     "dest": "build/assets/css/"
   },
   "js": {
+    "base": 'src/base/js/'
     "coffee": "src/coffee/*.coffee",
     "dest": "build/assets/js/"
   },
@@ -72,7 +75,12 @@ gulp.task 'server', ()->
     livereload: true
   });
 
+# copy base files
+gulp.task 'base', ()->
+  gulp.src(config.style.base+'*.css').pipe gulp.dest(config.style.dest)
+  gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
+
 # default
 gulp.task "default", ['server', 'watch']
 # build
-gulp.task "build", ['style', 'js', 'html']
+gulp.task "build", ['base', 'style', 'js', 'html']
