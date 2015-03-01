@@ -79,6 +79,7 @@ gulp.task 'server', ()->
 gulp.task 'base', ()->
   gulp.src(config.style.base+'*.css').pipe gulp.dest(config.style.dest)
   gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
+  gulp.src(config.base+'fonts/*').pipe gulp.dest(config.build+'assets/fonts/')
 
 # default
 gulp.task "default", ['server', 'watch']
