@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
-  <div id="container" class="effect aside-in" ng-class="{'mainnav-lg': lgMainnav, 'mainnav-sm': !lgMainnav}">
+  <div id="container" class="effect aside-in" ng-class="{'mainnav-lg': !smMainnav, 'mainnav-sm': smMainnav}">
     <!-- header -->
     <header id="navbar">
       <div id="navbar-container" class="boxed">
@@ -35,7 +35,7 @@
             <!--Navigation toogle button-->
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <li class="tgl-menu-btn">
-              <a class="mainnav-toggle" ng-click="lgMainnav = !lgMainnav">
+              <a class="mainnav-toggle" ng-click="smMainnav = !smMainnav">
                 <i class="fa fa-navicon fa-lg"></i>
               </a>
             </li>
@@ -540,7 +540,7 @@
                   </li>
             
                   <!--Menu list item-->
-                  <li class="active-sub active">
+                  <li open-sub-menu class="">
                     <a href="#" data-original-title="" title="" class="">
                       <i class="fa fa-th"></i>
                       <span class="menu-title">
@@ -551,7 +551,7 @@
             
                     <!--Submenu-->
                     
-                  <ul class="collapse in pop-in">
+                    <ul class="collapse pop-in">
                       <li><a href="layouts-collapsed-navigation.html">Collapsed Navigation</a></li>
                       <li><a href="layouts-offcanvas-navigation.html">Off-Canvas Navigation</a></li>
                       <li><a href="layouts-offcanvas-slide-in-navigation.html">Slide-in Navigation</a></li>
@@ -564,7 +564,8 @@
                       <li><a href="layouts-fixed-navbar.html">Fixed Navbar</a></li>
                       <li><a href="layouts-fixed-footer.html">Fixed Footer</a></li>
                       
-                    </ul></li>
+                    </ul>
+                  </li>
             
                   <!--Menu list item-->
                   <li>
@@ -592,7 +593,7 @@
             
                     <!--Submenu-->
                     
-                  <ul class="collapse pop-in">
+                    <ul class="collapse pop-in">
                       <li><a href="ui-buttons.html">Buttons</a></li>
                       <li><a href="ui-checkboxes-radio.html">Checkboxes &amp; Radio</a></li>
                       <li><a href="ui-panels.html">Panels</a></li>
@@ -605,7 +606,8 @@
                       <li><a href="ui-alerts-tooltips.html">Alerts &amp; Tooltips</a></li>
                       <li><a href="ui-helper-classes.html">Helper Classes</a></li>
                       
-                    </ul></li>
+                    </ul>
+                  </li>
             
                   <!--Menu list item-->
                   <li>
@@ -1104,11 +1106,13 @@
       paths: {
         'angular': 'angular.min',
         'angular-ui-router': 'angular-ui-router.min',
-        'angular-couch-potato': 'angular-couch-potato'
+        'angular-couch-potato': 'angular-couch-potato',
+        'angular-ui-bootstrap': 'ui-bootstrap-tpls-0.12.1.min'
       },
       shim: {
         'angular': { exports: 'angular' },
-        'angular-ui-router': { deps: ['angular'] }
+        'angular-ui-router': { deps: ['angular'] },
+        'angular-ui-bootstrap': { deps: ['angular'] }
       }
     });
 

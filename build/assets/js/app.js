@@ -1,4 +1,4 @@
-define(['angular', 'angular-couch-potato', 'angular-ui-router'], function(angular, couchPotato) {
+define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-bootstrap'], function(angular, couchPotato) {
   var app;
   app = angular.module('app', ['scs.couch-potato', 'ui.router']);
   couchPotato.configureApp(app);
@@ -7,7 +7,10 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router'], function(angula
       $urlRouterProvider.when('', '/');
       return $stateProvider.state('app', {
         url: '/',
-        template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>'
+        template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>',
+        resolve: {
+          dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
+        }
       }).state('app.contacts', {
         url: 'contacts',
         templateUrl: 'templates/contacts.html',
@@ -25,5 +28,6 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router'], function(angula
       return $rootScope.$stateParams = $stateParams;
     }
   ]);
+  console.log('app,,,,');
   return app;
 });
