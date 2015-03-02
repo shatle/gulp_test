@@ -4,10 +4,11 @@ define ['app'], (app)->
     console.log 'openSubMenu,,,,,'
     return {
       link: (scope, element, attrs)->
-        element.addEventListener 'click', ()->
-          console.log 'linkkk,,,,,'
-          angular.element('[open-sub-menu]').forEach ($e)->
-            $e.classList.remove 'active'
-          element.classList.add 'active'
+        console.log 'link,,,,,',element,attrs
+        element.on 'click', ()->
+          console.log 'addEventListener,,,,,'
+          angular.element('[open-sub-menu]').forEach (e)->
+            e.removeClass 'active'
+          element.addClass 'active'
         , false
     }
