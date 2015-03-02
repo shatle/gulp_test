@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
-  <div id="container" class="effect aside-in mainnav-lg">
+  <div id="container" class="effect aside-in" ng-class="{'mainnav-lg': lgMainnav, 'mainnav-sm': !lgMainnav}">
     <!-- header -->
     <header id="navbar">
       <div id="navbar-container" class="boxed">
@@ -35,7 +35,7 @@
             <!--Navigation toogle button-->
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <li class="tgl-menu-btn">
-              <a class="mainnav-toggle" href="#">
+              <a class="mainnav-toggle" ng-click="lgMainnav = !lgMainnav">
                 <i class="fa fa-navicon fa-lg"></i>
               </a>
             </li>
