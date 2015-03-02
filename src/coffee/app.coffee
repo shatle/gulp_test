@@ -12,7 +12,11 @@ define ['angular',
         $stateProvider
           .state('app', {
               url: '/',
-              template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>',
+              # template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>',
+              views: {
+                '': { template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>' },
+                'mainnav': {templateUrl: 'templates/mainnav.html'}
+              },
               resolve: {
                 dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
               }

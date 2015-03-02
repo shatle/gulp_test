@@ -4,12 +4,13 @@ define(['app'], function(app) {
     console.log('openSubMenu,,,,,');
     return {
       link: function(scope, element, attrs) {
-        return element.addEventListener('click', function() {
-          console.log('linkkk,,,,,');
-          angular.element('[open-sub-menu]').forEach(function($e) {
-            return $e.classList.remove('active');
+        console.log('link,,,,,', element, attrs);
+        return element.on('click', function() {
+          console.log('addEventListener,,,,,');
+          angular.element('[open-sub-menu]').forEach(function(e) {
+            return e.removeClass('active');
           });
-          return element.classList.add('active');
+          return element.addClass('active');
         }, false);
       }
     };

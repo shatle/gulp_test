@@ -7,7 +7,14 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
       $urlRouterProvider.when('', '/');
       return $stateProvider.state('app', {
         url: '/',
-        template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>',
+        views: {
+          '': {
+            template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>'
+          },
+          'mainnav': {
+            templateUrl: 'templates/mainnav.html'
+          }
+        },
         resolve: {
           dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
         }
