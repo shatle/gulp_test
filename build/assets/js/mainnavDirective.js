@@ -1,17 +1,23 @@
 define(['app'], function(app) {
-  console.log('registerDirective,,,,,');
   return app.registerDirective('openSubMenu', function() {
-    console.log('openSubMenu,,,,,');
     return {
       link: function(scope, element, attrs) {
-        console.log('link,,,,,', element, attrs);
-        return element.on('click', function() {
-          console.log('addEventListener,,,,,');
-          angular.element('[open-sub-menu]').forEach(function(e) {
-            return e.removeClass('active');
+        var toActive, toUnactive;
+        toActive = function(element) {
+          angular.element('li[open-sub-menu]').each(function(__, e) {
+            return angular.element(e).removeClass('active').find('>ul.collapse').removeClass('in');
           });
-          return element.addClass('active');
-        }, false);
+          return angular.element(element).addClass('active').find('>ul.collapse').addClass('in');
+        };
+        toUnactive = function(element) {
+          return angular.element(element).removeClass('active').find('>ul.collapse').removeClass('in');
+        };
+        return angular.element(element).on('click', function() {
+          if (element[0].classList.contains('active')) {
+            return toUnactive(element);
+          }
+          return toActive(element);
+        });
       }
     };
   });
