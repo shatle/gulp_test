@@ -1,10 +1,12 @@
 define ['angular',
-  'angular-couch-potato', 'angular-ui-router', 'angular-ui-bootstrap'], 
-  (angular, couchPotato)->
+  'angular-couch-potato', 'angular-ui-router', 'angular-ui-bootstrap',
+  'nanoscroller',
+  ], (angular, couchPotato)->
 
     app = angular.module('app', ['scs.couch-potato', 'ui.router'])
     couchPotato.configureApp(app);
 
+    # Config router
     app.config ['$stateProvider','$urlRouterProvider', '$couchPotatoProvider', 
       ($stateProvider,$urlRouterProvider,$couchPotatoProvider)->
         $urlRouterProvider.when('', '/')
@@ -31,6 +33,27 @@ define ['angular',
             })
     ]
 
+    # Global controllers
+    # which can be able to delay
+    app.controller 'messagesCtrl', [ '$scope', '$state', '$timeout',
+      ($scope, $state, $timeout)->
+        console.log 'messagesCtrl'
+        $scope.status = 
+          isopen: false
+
+        $scope.toggleDropdown = ($event)->
+          console.log 'toggleDropdown'
+          $event.preventDefault()
+          $event.stopPropagation()
+          $scope.status.isopen = !$scope.status.isopen
+
+        $timeout ()->
+          console.log 'nanoScroller'
+          $('.nano').nanoScroller({ scroll: 'top' }).height(265)
+
+    ]
+
+    # init run
     app.run ['$couchPotato', '$state', '$stateParams', '$rootScope', 
       ($couchPotato, $state, $stateParams, $rootScope)-> 
         app.lazy = $couchPotato;

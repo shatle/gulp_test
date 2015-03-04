@@ -7139,6 +7139,10 @@ a:hover, a:focus {
   position: relative;
 }
 
+.tgl-menu-btn a {
+  cursor: pointer;
+}
+
 #container.mainnav-sm #mainnav #mainnav-menu li[open-sub-menu].active ul.collapse {
   position: fixed;
   left: 50px;

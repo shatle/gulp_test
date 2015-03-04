@@ -47,8 +47,8 @@
 
             <!--Messages Dropdown-->
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-            <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+            <li class="dropdown" ng-class="{'open': status.isopen}" ng-controller="messagesCtrl">
+              <a ng-click="toggleDropdown($event)" data-toggle="dropdown" class="dropdown-toggle" >
                 <i class="fa fa-envelope fa-lg"></i>
                 <span class="badge badge-header badge-warning">9</span>
               </a>
@@ -57,7 +57,7 @@
                 <div class="pad-all bord-btm">
                   <p class="text-lg text-muted text-thin mar-no">You have 3 messages.</p>
                 </div>
-                <div class="nano scrollable has-scrollbar" style="height: 0px;">
+                <div class="nano scrollable">
                   <div class="nano-content" tabindex="0" style="right: -15px;">
                     <ul class="head-list">
                   
@@ -134,7 +134,10 @@
                       </li>
                     </ul>
                   </div>
-                <div class="nano-pane" style="display: none;"><div class="nano-slider" style="height: 20px; transform: translate(0px, 0px);"></div></div></div>
+                  <div class="nano-pane">
+                    <div class="nano-slider"></div>
+                  </div>
+                </div>
 
                 <div class="pad-all bord-top">
                   <a href="#" class="btn-link text-dark box-block">
@@ -816,12 +819,17 @@
         'angular': 'angular.min',
         'angular-ui-router': 'angular-ui-router.min',
         'angular-couch-potato': 'angular-couch-potato',
-        'angular-ui-bootstrap': 'ui-bootstrap-tpls-0.12.1.min'
+        'angular-ui-bootstrap': 'ui-bootstrap-tpls-0.12.1.min',
+
+        'jquery': 'jquery-2.1.3.min',
+        'nanoscroller': 'jquery.nanoscroller.min',
       },
       shim: {
         'angular': { exports: 'angular' },
         'angular-ui-router': { deps: ['angular'] },
-        'angular-ui-bootstrap': { deps: ['angular'] }
+        'angular-ui-bootstrap': { deps: ['angular'] },
+
+        'nanoscroller': {deps: ['jquery']}
       }
     });
 
