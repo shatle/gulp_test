@@ -7139,6 +7139,19 @@ a:hover, a:focus {
   position: relative;
 }
 
+.dropdown i.fa.fa-times {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 20px;
+  padding: 14px 10px;
+  color: #666;
+}
+.dropdown i.fa.fa-times:hover {
+  color: #cccccc;
+}
+
 .tgl-menu-btn a {
   cursor: pointer;
 }
