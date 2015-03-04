@@ -34,17 +34,24 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
       $scope.status = {
         isopen: false
       };
+      $scope.data = {
+        nanoContentHeight: 265
+      };
       $scope.toggleDropdown = function($event) {
         console.log('toggleDropdown');
         $event.preventDefault();
         $event.stopPropagation();
-        return $scope.status.isopen = !$scope.status.isopen;
+        $scope.status.isopen = !$scope.status.isopen;
+        return $timeout(function() {
+          if ($scope.status.isopen) {
+            return $($event.target).closest('li.dropdown').find('.nano').nanoScroller({
+              scroll: 'top'
+            });
+          }
+        });
       };
       return $timeout(function() {
-        console.log('nanoScroller');
-        return $('.nano').nanoScroller({
-          scroll: 'top'
-        }).height(265);
+        return console.log('nanoScroller');
       });
     }
   ]);

@@ -56,11 +56,13 @@
               <div class="dropdown-menu dropdown-menu-md with-arrow">
                 <div class="pad-all bord-btm">
                   <p class="text-lg text-muted text-thin mar-no">You have 3 messages.</p>
+
+                  <i class="fa fa-times pull-right" ng-click="toggleDropdown($event)"></i>
                 </div>
-                <div class="nano scrollable">
-                  <div class="nano-content" tabindex="0" style="right: -15px;">
+                <!-- height: 265px; style="height: 265px;" style="right: -15px;"-->
+                <div class="nano scrollable" style="height: {{data.nanoContentHeight}}px;">
+                  <div class="nano-content"  tabindex="0">
                     <ul class="head-list">
-                  
                       <li>
                         <a href="#" class="media">
                           <div class="media-left">
