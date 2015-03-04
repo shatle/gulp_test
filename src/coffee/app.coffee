@@ -56,7 +56,7 @@ define ['angular',
     app.directive 'nanoDropdown', ['$timeout', ($timeout)->
       return {
         link: (scope, element, attrs)->
-          console.log 'nanoDropdown2222'
+          # console.log 'nanoDropdown2222'
           scope.status = 
             isopen: false
 
@@ -64,7 +64,7 @@ define ['angular',
             nanoContentHeight: 265
 
           scope.toggleDropdown = ($event)->
-            console.log 'toggleDropdown222', element
+            # console.log 'toggleDropdown222', element
             $event.preventDefault()
             $event.stopPropagation()
             scope.status.isopen = !scope.status.isopen
