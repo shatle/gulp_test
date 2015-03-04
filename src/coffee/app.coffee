@@ -40,6 +40,8 @@ define ['angular',
         console.log 'messagesCtrl'
         $scope.status = 
           isopen: false
+        $scope.data = 
+          nanoContentHeight: 265
 
         $scope.toggleDropdown = ($event)->
           console.log 'toggleDropdown'
@@ -47,9 +49,16 @@ define ['angular',
           $event.stopPropagation()
           $scope.status.isopen = !$scope.status.isopen
 
+          $timeout ()->
+            $($event.target).closest('li.dropdown').find('.nano').nanoScroller({ scroll: 'top' }) if $scope.status.isopen
+
+          # height:{{ data.nanoContentHeight}}
+          # .height(265)
         $timeout ()->
           console.log 'nanoScroller'
-          $('.nano').nanoScroller({ scroll: 'top' }).height(265)
+          # $('.nano').nanoScroller({ scroll: 'top' })
+            # .find('.nano-pane').css({'display': 'block'})
+        # , 1000
 
     ]
 
