@@ -1,5 +1,26 @@
-body {
-  font-size: 18px;
-  h2 { color: blue; }
-  p { font-weight: bold; }
+@import "nifty";
+@import "dropdown";
+// 
+.tgl-menu-btn a { cursor: pointer; }
+#container.mainnav-sm {
+
+  #mainnav {
+    #mainnav-menu {
+      li[open-sub-menu].active {
+        ul.collapse {
+          position: fixed;
+          left: 50px;
+          padding: 10px;
+          margin-top: -43px;
+          background-color: #A04A4A;
+          // top: 0px;
+          visibility: visible;
+          display: block;
+          height: auto !important;
+        }
+      }
+      
+    }
+  }
+  
 }

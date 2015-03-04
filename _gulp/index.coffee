@@ -17,7 +17,7 @@ config = {
   "build": "build/",
   "style": {
     "base": 'src/base/css/'
-    "scss": "src/scss/",
+    "scss": "src/scss/app.scss",
     "dest": "build/assets/css/"
   },
   "js": {
@@ -48,9 +48,9 @@ gulp.task('js', ->
   gulp.src(config.js.coffee)
     .pipe(coffee({bare: true}).on('error', util.log))
     .pipe(gulp.dest(config.js.dest))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(jsmin())
-    .pipe(gulp.dest(config.js.dest))
+    # .pipe(rename({suffix: '.min'}))
+    # .pipe(jsmin())
+    # .pipe(gulp.dest(config.js.dest))
     .pipe connect.reload()
 )
 # move main html
@@ -79,6 +79,7 @@ gulp.task 'server', ()->
 gulp.task 'base', ()->
   gulp.src(config.style.base+'*.css').pipe gulp.dest(config.style.dest)
   gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
+  gulp.src(config.base+'fonts/*').pipe gulp.dest(config.build+'assets/fonts/')
 
 # default
 gulp.task "default", ['server', 'watch']

@@ -54,6 +54,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   position: relative;
   min-width: 290px;
   overflow: hidden;
+  // opacity: 0;
+  // visibility: hidden;
   -webkit-transition: opacity .5s linear 1s;
   transition: opacity .5s linear 1s;
 }
@@ -690,6 +692,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 #mainnav-shortcut {
   overflow: hidden;
+}
+
+#mainnav-menu-wrap {
+  // margin-top: -50px;
+  // padding-top: 50px;
 }
 
 #mainnav-menu ul, .mainnav-widget ul, .menu-popover ul, .menu-popover .sub-menu ul {
@@ -7137,32 +7144,4 @@ a:hover, a:focus {
   color: #515151;
   border-color: #f2efef;
   position: relative;
-}
-
-.dropdown i.fa.fa-times {
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 20px;
-  padding: 14px 10px;
-  color: #666;
-}
-.dropdown i.fa.fa-times:hover {
-  color: #cccccc;
-}
-
-.tgl-menu-btn a {
-  cursor: pointer;
-}
-
-#container.mainnav-sm #mainnav #mainnav-menu li[open-sub-menu].active ul.collapse {
-  position: fixed;
-  left: 50px;
-  padding: 10px;
-  margin-top: -43px;
-  background-color: #A04A4A;
-  visibility: visible;
-  display: block;
-  height: auto !important;
 }
