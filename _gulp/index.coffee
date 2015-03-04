@@ -17,7 +17,7 @@ config = {
   "build": "build/",
   "style": {
     "base": 'src/base/css/'
-    "scss": "src/scss/",
+    "scss": "src/scss/app.scss",
     "dest": "build/assets/css/"
   },
   "js": {

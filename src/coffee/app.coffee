@@ -1,6 +1,5 @@
 define ['angular',
-  'angular-couch-potato', 'angular-ui-router', 'angular-ui-bootstrap',
-  'nanoscroller',
+  'angular-couch-potato', 'angular-ui-router', 'angular-ui-bootstrap'
   ], (angular, couchPotato)->
 
     app = angular.module('app', ['scs.couch-potato', 'ui.router'])
@@ -38,28 +37,41 @@ define ['angular',
     app.controller 'messagesCtrl', [ '$scope', '$state', '$timeout',
       ($scope, $state, $timeout)->
         console.log 'messagesCtrl'
-        $scope.status = 
-          isopen: false
-        $scope.data = 
-          nanoContentHeight: 265
+        # $scope.status = 
+        #   isopen: false
+        # $scope.data = 
+        #   nanoContentHeight: 265
 
-        $scope.toggleDropdown = ($event)->
-          console.log 'toggleDropdown'
-          $event.preventDefault()
-          $event.stopPropagation()
-          $scope.status.isopen = !$scope.status.isopen
+        # $scope.toggleDropdown = ($event)->
+        #   $event.preventDefault()
+        #   $event.stopPropagation()
+        #   $scope.status.isopen = !$scope.status.isopen
 
-          $timeout ()->
-            $($event.target).closest('li.dropdown').find('.nano').nanoScroller({ scroll: 'top' }) if $scope.status.isopen
+        #   $timeout ()->
+        #     $($event.target).closest('li.dropdown').find('.nano').nanoScroller({ scroll: 'top' }) if $scope.status.isopen
 
-          # height:{{ data.nanoContentHeight}}
-          # .height(265)
-        $timeout ()->
-          console.log 'nanoScroller'
-          # $('.nano').nanoScroller({ scroll: 'top' })
-            # .find('.nano-pane').css({'display': 'block'})
-        # , 1000
+    ]
 
+    # Global Directive
+    app.directive 'nanoDropdown', ['$timeout', ($timeout)->
+      return {
+        link: (scope, element, attrs)->
+          console.log 'nanoDropdown2222'
+          scope.status = 
+            isopen: false
+
+          scope.data = 
+            nanoContentHeight: 265
+
+          scope.toggleDropdown = ($event)->
+            console.log 'toggleDropdown222', element
+            $event.preventDefault()
+            $event.stopPropagation()
+            scope.status.isopen = !scope.status.isopen
+
+            $timeout ()->
+              angular.element(element).find('.nano').nanoScroller({ scroll: 'top' }) if scope.status.isopen
+      }
     ]
 
     # init run

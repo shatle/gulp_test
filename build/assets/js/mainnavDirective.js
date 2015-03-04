@@ -3,6 +3,7 @@ define(['app'], function(app) {
     return {
       link: function(scope, element, attrs) {
         var toActive, toUnactive;
+        console.log('openSubMenu');
         toActive = function(element) {
           angular.element('li[open-sub-menu]').each(function(__, e) {
             return angular.element(e).removeClass('active').find('>ul.collapse').removeClass('in');

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="assets/css/app.css">
 
   <script src="assets/js/jquery-2.1.3.min.js"></script>
+  <script src="assets/js/jquery.nanoscroller.min.js"></script>
 </head>
 <body>
   <div id="container" class="effect aside-in" ng-class="{'mainnav-lg': !smMainnav, 'mainnav-sm': smMainnav}">
@@ -47,7 +48,7 @@
 
             <!--Messages Dropdown-->
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-            <li class="dropdown" ng-class="{'open': status.isopen}" ng-controller="messagesCtrl">
+            <li class="dropdown" nano-dropdown ng-class="{'open': status.isopen}" ng-controller="messagesCtrl">
               <a ng-click="toggleDropdown($event)" data-toggle="dropdown" class="dropdown-toggle" >
                 <i class="fa fa-envelope fa-lg"></i>
                 <span class="badge badge-header badge-warning">9</span>
@@ -156,19 +157,20 @@
 
             <!--Notification dropdown-->
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-            <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+            <li class="dropdown" nano-dropdown ng-class="{'open': status.isopen}">
+              <a ng-click="toggleDropdown($event)" data-toggle="dropdown" class="dropdown-toggle">
                 <i class="fa fa-bell fa-lg"></i>
-                <span class="badge badge-header badge-danger">5</span>
+                <span  class="badge badge-header badge-danger">5</span>
               </a>
 
               <!--Notification dropdown menu-->
               <div class="dropdown-menu dropdown-menu-md with-arrow">
                 <div class="pad-all bord-btm">
                   <p class="text-lg text-muted text-thin mar-no">You have 3 messages.</p>
+                  <i class="fa fa-times pull-right" ng-click="toggleDropdown($event)"></i>
                 </div>
-                <div class="nano scrollable has-scrollbar" style="height: 0px;">
-                  <div class="nano-content" tabindex="0" style="right: -15px;">
+                <div class="nano scrollable" style="height: {{data.nanoContentHeight}}px;">
+                  <div class="nano-content" tabindex="0">
                     <ul class="head-list">
 
                       <!-- Dropdown list-->
