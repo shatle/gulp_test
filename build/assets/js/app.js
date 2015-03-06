@@ -37,7 +37,6 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
     '$timeout', function($timeout) {
       return {
         link: function(scope, element, attrs) {
-          console.log('nanoDropdown2222');
           scope.status = {
             isopen: false
           };
@@ -45,7 +44,6 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
             nanoContentHeight: 265
           };
           return scope.toggleDropdown = function($event) {
-            console.log('toggleDropdown222', element);
             $event.preventDefault();
             $event.stopPropagation();
             scope.status.isopen = !scope.status.isopen;
