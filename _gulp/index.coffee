@@ -10,6 +10,8 @@ util = require('gulp-util')
 del = require('del')
 livereload = require 'gulp-livereload'
 connect = require 'gulp-connect'
+argv = require('yargs').argv
+gulpif = require('gulp-if')
 # 
 config = {
   "base": 'src/base/',
@@ -32,54 +34,60 @@ config = {
   "templates": {
     "src": "src/templates/*.html",
     "dest": "build/templates/"
+  },
+  "images": {
+    "src": "src/img/*",
+    "dest": "build/assets/img/"
   }
 }
 
 # compile scss
 gulp.task('style', ->
-  # del([config.style.dest])
   sass(config.style.scss, { style: 'expanded' })
+    .pipe(gulpif(argv.production, cssmin()))
     .pipe(gulp.dest(config.style.dest))
-    # .pipe(rename({suffix: '.min'}))
-    # .pipe(cssmin())
-    # .pipe(gulp.dest(config.style.dest))
     .pipe connect.reload()
 )
 
 # compile coffeescript
 gulp.task('js', ->
-  # del([config.js.dest])
   gulp.src(config.js.coffee)
     .pipe(coffee({bare: true}).on('error', util.log))
+    .pipe(gulpif(argv.production,jsmin()))
     .pipe(gulp.dest(config.js.dest))
-    # .pipe(rename({suffix: '.min'}))
-    # .pipe(jsmin())
-    # .pipe(gulp.dest(config.js.dest))
     .pipe connect.reload()
 )
 # move main html
 gulp.task('index', ->
   gulp.src(config.index.src)
+    .pipe(gulpif(argv.production,htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest(config.index.dest))
-    # .pipe(rename({suffix: '.min'}))
-    # .pipe(htmlmin({collapseWhitespace: true}))
-    # .pipe(gulp.dest(config.index.dest))
     .pipe connect.reload()
 )
 gulp.task('templates', ->
   gulp.src(config.templates.src)
+    .pipe(gulpif(argv.production,htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest(config.templates.dest))
-    # .pipe(rename({suffix: '.min'}))
-    # .pipe(htmlmin({collapseWhitespace: true}))
-    # .pipe(gulp.dest(config.templates.dest))
     .pipe connect.reload()
 )
+gulp.task('images', ->
+  gulp.src(config.images.src)
+    .pipe(gulp.dest(config.images.dest))
+    .pipe connect.reload()
+)
+# copy base files
+gulp.task 'base', ()->
+  gulp.src(config.style.base+'*.css').pipe gulp.dest(config.style.dest)
+  gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
+  gulp.src(config.base+'fonts/*').pipe gulp.dest(config.build+'assets/fonts/')
+
 # watch
 gulp.task 'watch', ()->
   gulp.watch config.src+'/**/*.scss', ['style']
   gulp.watch config.src+'/**/*.coffee', ['js']
   gulp.watch config.templates.src, ['templates']
   gulp.watch config.index.src, ['index']
+  gulp.watch config.images.src, ['images']
 # server
 gulp.task 'server', ()->
   connect.server({
@@ -88,13 +96,12 @@ gulp.task 'server', ()->
     livereload: true
   });
 
-# copy base files
-gulp.task 'base', ()->
-  gulp.src(config.style.base+'*.css').pipe gulp.dest(config.style.dest)
-  gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
-  gulp.src(config.base+'fonts/*').pipe gulp.dest(config.build+'assets/fonts/')
-
 # default
 gulp.task "default", ['server', 'watch']
+# del
+gulp.task "del", ()->
+  del([config.build])
 # build
-gulp.task "build", ['base', 'style', 'js', 'index', 'templates']
+gulp.task "build", ()->
+  del([config.build]) if argv.production
+  gulp.start 'base', 'images', 'style', 'js', 'index', 'templates'

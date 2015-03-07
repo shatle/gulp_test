@@ -13,6 +13,8 @@
     "gulp-concat":"",
     "gulp-util":"",
     "gulp-livereload":"",
-    "gulp-connect":""
+    "gulp-connect":"",
+    "yargs": "",
+    "gulp-if": ""
   }
 }
