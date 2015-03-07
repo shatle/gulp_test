@@ -7,7 +7,7 @@ rename = require('gulp-rename')
 concat = require('gulp-concat')
 coffee = require('gulp-coffee')
 util = require('gulp-util')
-del = require('del')
+rimraf = require('gulp-rimraf')
 livereload = require 'gulp-livereload'
 connect = require 'gulp-connect'
 argv = require('yargs').argv
@@ -65,13 +65,13 @@ gulp.task('js', ->
 # move main html
 gulp.task('index', ->
   gulp.src(config.index.src)
-    .pipe(gulpif(argv.production,htmlmin({collapseWhitespace: true})))
+    .pipe(gulpif(argv.production,htmlmin({collapseWhitespace: true, removeComments: true})))
     .pipe(gulp.dest(config.index.dest))
     .pipe connect.reload()
 )
 gulp.task('templates', ->
   gulp.src(config.templates.src)
-    .pipe(gulpif(argv.production,htmlmin({collapseWhitespace: true})))
+    .pipe(gulpif(argv.production,htmlmin({collapseWhitespace: true, removeComments: true})))
     .pipe(gulp.dest(config.templates.dest))
     .pipe connect.reload()
 )
@@ -103,10 +103,7 @@ gulp.task 'server', ()->
 
 # default
 gulp.task "default", ['server', 'watch']
-# del
-gulp.task "del", ()->
-  del([config.build])
 # build
 gulp.task "build", ()->
-  del([config.build]) if argv.production
-  gulp.start 'base', 'images', 'style', 'js', 'index', 'templates'
+  rimraf(config.build, ()->) if argv.production 
+  gulp.start 'index', 'templates','style', 'js', 'images', 'base'

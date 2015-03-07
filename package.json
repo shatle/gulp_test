@@ -4,7 +4,6 @@
   "dependencies": {
     "gulp": "",
     "gulp-ruby-sass": "",
-    "del": "",
     "gulp-cssmin":"",
     "gulp-jsmin":"",
     "gulp-htmlmin":"",
@@ -15,6 +14,7 @@
     "gulp-livereload":"",
     "gulp-connect":"",
     "yargs": "",
-    "gulp-if": ""
+    "gulp-if": "",
+    "gulp-rimraf":""
   }
 }
