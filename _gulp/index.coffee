@@ -18,7 +18,7 @@ config = {
   "src": "src/",
   "build": "build/",
   "style": {
-    "base": 'src/base/css/'
+    "base": 'src/base/css/*.css'
     "scss": "src/scss/app.scss",
     "dest": "build/assets/css/"
   },
@@ -49,6 +49,11 @@ gulp.task('style', ->
     .pipe connect.reload()
 )
 
+gulp.task 'style-base', ->
+  gulp.src(config.style.base)
+    .pipe(concat('base.css'))
+    .pipe(gulp.dest(config.style.dest))
+
 # compile coffeescript
 gulp.task('js', ->
   gulp.src(config.js.coffee)
@@ -77,7 +82,7 @@ gulp.task('images', ->
 )
 # copy base files
 gulp.task 'base', ()->
-  gulp.src(config.style.base+'*.css').pipe gulp.dest(config.style.dest)
+  gulp.start 'style-base'
   gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
   gulp.src(config.base+'fonts/*').pipe gulp.dest(config.build+'assets/fonts/')
 
