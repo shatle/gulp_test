@@ -20,10 +20,20 @@ define ['app'], (app)->
           return toActive(element)     
     }
 
-  app.registerDirective 'nanoDropdown',['$timeout', ($timeout)->
+  # 
+  # Example:
+  #   <li nano-dropdown="Callback(isopen) ng-class="{active: status.isopen}" ></li>
+  #   
+  #   The element's Controller should have Callback(isopen) method, 
+  #   which transmit open status to the Controller.
+  #   
+  # Attention: should not be isolate scope, ie, {scope: true, ...}
+  # 
+  app.registerDirective 'nanoDropdown',['$timeout', '$parse', ($timeout, $parse)->
     return {
       link: (scope, element, attrs)->
-        console.log 'nanoDropdown'
+        invoker = $parse(attrs.nanoDropdown)
+        # console.log 'nanoDropdown'
         scope.status = 
           isopen: false
 
@@ -31,12 +41,13 @@ define ['app'], (app)->
           nanoContentHeight: 265
 
         scope.toggleDropdown = ($event)->
-          console.log 'nanoDropdown,,,,toggleDropdown'
           $event.preventDefault()
           $event.stopPropagation()
           scope.status.isopen = !scope.status.isopen
 
           $timeout ()->
+            # scope.nanoDropdown {isopen: scope.status.isopen}
+            invoker scope, {isopen: scope.status.isopen}
             angular.element(element).find('.nano').nanoScroller({ scroll: 'top' }) if scope.status.isopen
     }
   ]

@@ -23,10 +23,11 @@ define(['app'], function(app) {
     };
   });
   return app.registerDirective('nanoDropdown', [
-    '$timeout', function($timeout) {
+    '$timeout', '$parse', function($timeout, $parse) {
       return {
         link: function(scope, element, attrs) {
-          console.log('nanoDropdown');
+          var invoker;
+          invoker = $parse(attrs.nanoDropdown);
           scope.status = {
             isopen: false
           };
@@ -34,11 +35,13 @@ define(['app'], function(app) {
             nanoContentHeight: 265
           };
           return scope.toggleDropdown = function($event) {
-            console.log('nanoDropdown,,,,toggleDropdown');
             $event.preventDefault();
             $event.stopPropagation();
             scope.status.isopen = !scope.status.isopen;
             return $timeout(function() {
+              invoker(scope, {
+                isopen: scope.status.isopen
+              });
               if (scope.status.isopen) {
                 return angular.element(element).find('.nano').nanoScroller({
                   scroll: 'top'

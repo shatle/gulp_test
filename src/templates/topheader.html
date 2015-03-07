@@ -12,7 +12,7 @@
 
   <!--Messages Dropdown-->
   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  <li class="dropdown" nano-dropdown ng-class="{'open': status.isopen}" ng-controller="messagesCtrl">
+  <li class="dropdown" ng-controller="messagesCtrl" nano-dropdown="nanoOpen(isopen)" ng-class="{'open': status.isopen}">
     <a ng-click="toggleDropdown($event)" data-toggle="dropdown" class="dropdown-toggle" >
       <i class="fa fa-envelope fa-lg"></i>
       <span class="badge badge-header badge-warning">9</span>
@@ -121,7 +121,7 @@
 
   <!--Notification dropdown-->
   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  <li class="dropdown" nano-dropdown ng-class="{'open': status.isopen}">
+  <li class="dropdown" ng-controller="notificationsCtrl" nano-dropdown="nanoOpen(isopen)" ng-class="{'open': status.isopen}">
     <a ng-click="toggleDropdown($event)" data-toggle="dropdown" class="dropdown-toggle">
       <i class="fa fa-bell fa-lg"></i>
       <span  class="badge badge-header badge-danger">5</span>

@@ -7,6 +7,9 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
       $urlRouterProvider.when('', '/');
       return $stateProvider.state('app', {
         url: '/',
+        resolve: {
+          dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
+        },
         views: {
           '': {
             template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>'
@@ -15,11 +18,12 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
             templateUrl: 'templates/mainnav.html'
           },
           'topheader': {
-            templateUrl: 'templates/topheader.html'
+            templateUrl: 'templates/topheader.html',
+            controller: 'topheadCtrl',
+            resolve: {
+              dummy: $couchPotatoProvider.resolveDependencies(['topheadCtrl'])
+            }
           }
-        },
-        resolve: {
-          dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
         }
       }).state('app.contacts', {
         url: 'contacts',
@@ -29,11 +33,6 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
           dummy: $couchPotatoProvider.resolveDependencies(['contactsCtrl'])
         }
       });
-    }
-  ]);
-  app.controller('messagesCtrl', [
-    '$scope', '$state', '$timeout', function($scope, $state, $timeout) {
-      return console.log('messagesCtrl');
     }
   ]);
   app.run([
