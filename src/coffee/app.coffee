@@ -16,7 +16,8 @@ define ['angular',
               # template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>',
               views: {
                 '': { template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>' },
-                'mainnav': {templateUrl: 'templates/mainnav.html'}
+                'mainnav': {templateUrl: 'templates/mainnav.html'},
+                'topheader': { templateUrl: 'templates/topheader.html' }
               },
               resolve: {
                 dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
@@ -53,26 +54,26 @@ define ['angular',
     ]
 
     # Global Directive
-    app.directive 'nanoDropdown', ['$timeout', ($timeout)->
-      return {
-        link: (scope, element, attrs)->
-          # console.log 'nanoDropdown2222'
-          scope.status = 
-            isopen: false
+    # app.directive 'nanoDropdown', ['$timeout', ($timeout)->
+    #   return {
+    #     link: (scope, element, attrs)->
+    #       # console.log 'nanoDropdown2222'
+    #       scope.status = 
+    #         isopen: false
 
-          scope.data = 
-            nanoContentHeight: 265
+    #       scope.data = 
+    #         nanoContentHeight: 265
 
-          scope.toggleDropdown = ($event)->
-            # console.log 'toggleDropdown222', element
-            $event.preventDefault()
-            $event.stopPropagation()
-            scope.status.isopen = !scope.status.isopen
+    #       scope.toggleDropdown = ($event)->
+    #         # console.log 'toggleDropdown222', element
+    #         $event.preventDefault()
+    #         $event.stopPropagation()
+    #         scope.status.isopen = !scope.status.isopen
 
-            $timeout ()->
-              angular.element(element).find('.nano').nanoScroller({ scroll: 'top' }) if scope.status.isopen
-      }
-    ]
+    #         $timeout ()->
+    #           angular.element(element).find('.nano').nanoScroller({ scroll: 'top' }) if scope.status.isopen
+    #   }
+    # ]
 
     # init run
     app.run ['$couchPotato', '$state', '$stateParams', '$rootScope', 

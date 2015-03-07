@@ -13,6 +13,9 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
           },
           'mainnav': {
             templateUrl: 'templates/mainnav.html'
+          },
+          'topheader': {
+            templateUrl: 'templates/topheader.html'
           }
         },
         resolve: {
@@ -31,32 +34,6 @@ define(['angular', 'angular-couch-potato', 'angular-ui-router', 'angular-ui-boot
   app.controller('messagesCtrl', [
     '$scope', '$state', '$timeout', function($scope, $state, $timeout) {
       return console.log('messagesCtrl');
-    }
-  ]);
-  app.directive('nanoDropdown', [
-    '$timeout', function($timeout) {
-      return {
-        link: function(scope, element, attrs) {
-          scope.status = {
-            isopen: false
-          };
-          scope.data = {
-            nanoContentHeight: 265
-          };
-          return scope.toggleDropdown = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            scope.status.isopen = !scope.status.isopen;
-            return $timeout(function() {
-              if (scope.status.isopen) {
-                return angular.element(element).find('.nano').nanoScroller({
-                  scroll: 'top'
-                });
-              }
-            });
-          };
-        }
-      };
     }
   ]);
   app.run([

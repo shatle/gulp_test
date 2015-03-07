@@ -78,8 +78,8 @@ gulp.task('templates', ->
 gulp.task 'watch', ()->
   gulp.watch config.src+'/**/*.scss', ['style']
   gulp.watch config.src+'/**/*.coffee', ['js']
-  gulp.watch config.templates.src+'*.html', ['templates']
-  gulp.watch config.html.src, ['index']
+  gulp.watch config.templates.src, ['templates']
+  gulp.watch config.index.src, ['index']
 # server
 gulp.task 'server', ()->
   connect.server({
