@@ -14,12 +14,18 @@ define ['angular',
           .state('app', {
               url: '/',
               # template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>',
-              resolve: {
-                dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
-              },
+              # resolve: {
+              #   dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
+              # },
               views: {
                 '': { template: '<a ui-sref="app.contacts">contacts</a><div ui-view></div>' },
-                'mainnav': {templateUrl: 'templates/mainnav.html'},
+                'mainnav': {
+                  templateUrl: 'templates/mainnav.html',
+                  # controller: 'topheadCtrl',
+                  resolve: {
+                    dummy: $couchPotatoProvider.resolveDependencies(['mainnavDirective'])
+                  }
+                },
                 'topheader': { 
                   templateUrl: 'templates/topheader.html',
                   controller: 'topheadCtrl',
