@@ -1,13 +1,15 @@
 gulp = require('gulp')
 sass = require('gulp-ruby-sass')
 cssmin = require('gulp-cssmin')
-jsmin = require('gulp-jsmin')
+uglify = require('gulp-uglify')
+uglifyjs = require('gulp-uglifyjs')
 htmlmin = require('gulp-htmlmin')
 rename = require('gulp-rename')
 concat = require('gulp-concat')
 coffee = require('gulp-coffee')
 util = require('gulp-util')
-rimraf = require('gulp-rimraf')
+rimraf = require('rimraf') # delete folder
+grimraf = require('gulp-rimraf') # delete file
 livereload = require 'gulp-livereload'
 connect = require 'gulp-connect'
 argv = require('yargs').argv
@@ -58,7 +60,7 @@ gulp.task 'style-base', ->
 gulp.task('js', ->
   gulp.src(config.js.coffee)
     .pipe(coffee({bare: true}).on('error', util.log))
-    .pipe(gulpif(argv.production,jsmin()))
+    .pipe(gulpif(argv.production,uglify({compress:{drop_console: true}})))
     .pipe(gulp.dest(config.js.dest))
     .pipe connect.reload()
 )
@@ -103,7 +105,8 @@ gulp.task 'server', ()->
 
 # default
 gulp.task "default", ['server', 'watch']
+gulp.task "clean", ()->
+  rimraf(config.build, ()->)
 # build
 gulp.task "build", ()->
-  rimraf(config.build, ()->) if argv.production 
-  gulp.start 'index', 'templates','style', 'js', 'images', 'base'
+  gulp.start 'base', 'index', 'templates','style', 'js', 'images'
