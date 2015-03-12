@@ -38,7 +38,7 @@
 ```
 ~> git clone https://github.com/shatle/gulp_test
 ~> cd gulp_test
-~> npm install
+gulp_test> npm install
 gulp_test> gulp
 ```
 
