@@ -85,7 +85,9 @@ gulp.task('images', ->
 # copy base files
 gulp.task 'base', ()->
   gulp.start 'style-base'
-  gulp.src(config.js.base+'*.js').pipe gulp.dest(config.js.dest)
+  gulp.src(config.js.base+'*.js')
+    .pipe(gulpif(argv.production,uglify({compress:{drop_console: true}})))
+    .pipe(gulp.dest(config.js.dest))
   gulp.src(config.base+'fonts/*').pipe gulp.dest(config.build+'assets/fonts/')
 
 # watch
