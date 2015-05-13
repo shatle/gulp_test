@@ -31,6 +31,8 @@
 gem install compass
 ```
 
+`compass`详情请移步：[http://compass-style.org/reference/compass/](http://compass-style.org/reference/compass/)
+
 **gulp && coffee-script**
 
 ```
@@ -42,6 +44,8 @@ npm install -g gulp coffee-script
 ```
 npm install coffee-script --save-dev
 ```
+
+`coffeescript`详情请移步：[http://coffeescript.org](http://coffeescript.org)
 
 ## 命令
 
