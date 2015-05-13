@@ -10,6 +10,11 @@
     padding: 14px 10px;
     color: $icon_color;
 
-    &:hover { color: lighten($icon_color, 40%); }
+    @include transition-property(width);
+
+    &:hover { 
+      color: red; 
+      @include transform(scale($default-scale-x));
+    }
   }
 }

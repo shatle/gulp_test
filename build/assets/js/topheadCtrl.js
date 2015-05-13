@@ -1,1 +1,45 @@
-define(["app"],function(n){return n.registerController("topheadCtrl",["$scope","$state",function(n){return n.nanoOpen=function(n){return void 0}}]),n.registerController("messagesCtrl",["$scope","$state","$rootScope",function(n,t,o){var e;return e=!1,n.$on("isopen",function(t,o){return o&&!e&&(n.status.isopen=!1),e=!1}),n.nanoOpen=function(n){return n?(e=!0,o.$broadcast("isopen",!0)):void 0}}]),n.registerController("notificationsCtrl",["$scope","$state","$rootScope",function(n,t,o){var e;return e=!1,n.$on("isopen",function(t,o){return o&&!e&&(n.status.isopen=!1),e=!1}),n.nanoOpen=function(n){return n?(e=!0,o.$broadcast("isopen",!0)):void 0}}])});
+define(['app'], function(app) {
+  app.registerController('topheadCtrl', [
+    '$scope', '$state', function($scope, $state) {
+      return $scope.nanoOpen = function(isopen) {
+        return console.log("topheadCtrl $scope.nanoOpen,,,,", isopen);
+      };
+    }
+  ]);
+  app.registerController('messagesCtrl', [
+    '$scope', '$state', '$rootScope', function($scope, $state, $rootScope) {
+      var isLocalBroadcast;
+      isLocalBroadcast = false;
+      $scope.$on('isopen', function(event, isopen) {
+        if (isopen && !isLocalBroadcast) {
+          $scope.status.isopen = false;
+        }
+        return isLocalBroadcast = false;
+      });
+      return $scope.nanoOpen = function(isopen) {
+        if (isopen) {
+          isLocalBroadcast = true;
+          return $rootScope.$broadcast("isopen", true);
+        }
+      };
+    }
+  ]);
+  return app.registerController('notificationsCtrl', [
+    '$scope', '$state', '$rootScope', function($scope, $state, $rootScope) {
+      var isLocalBroadcast;
+      isLocalBroadcast = false;
+      $scope.$on('isopen', function(event, isopen) {
+        if (isopen && !isLocalBroadcast) {
+          $scope.status.isopen = false;
+        }
+        return isLocalBroadcast = false;
+      });
+      return $scope.nanoOpen = function(isopen) {
+        if (isopen) {
+          isLocalBroadcast = true;
+          return $rootScope.$broadcast("isopen", true);
+        }
+      };
+    }
+  ]);
+});

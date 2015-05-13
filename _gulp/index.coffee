@@ -10,31 +10,33 @@ coffee = require 'gulp-coffee'
 util = require 'gulp-util'
 rimraf = require 'rimraf' # delete folder
 grimraf = require 'gulp-rimraf' # delete file
+clean = require 'gulp-clean'
 livereload = require 'gulp-livereload'
 connect = require 'gulp-connect'
 argv = require('yargs').argv
 gulpif = require 'gulp-if'
+compass = require 'gulp-compass'
 # 
 config = 
-  "base": 'src/base/',
-  "src": "src/",
-  "build": "build/",
+  "base": 'src/base/'
+  "src": "src/"
+  "build": "build/"
   "style": 
     "base": 'src/base/css/*.css'
-    "scss": "src/scss/app.scss",
+    "scss": "src/scss/app.scss"
     "dest": "build/assets/css/"
-  ,"js": 
+  "js": 
     "base": 'src/base/js/'
-    "coffee": "src/coffee/*.coffee",
+    "coffee": "src/coffee/*.coffee"
     "dest": "build/assets/js/"
-  ,"index": 
-    "src": "src/index.html",
+  "index": 
+    "src": "src/index.html"
     "dest": "build/"
-  ,"templates": 
-    "src": "src/templates/*.html",
+  "templates": 
+    "src": "src/templates/*.html"
     "dest": "build/templates/"
-  ,"images": 
-    "src": "src/img/*",
+  "images": 
+    "src": "src/img/*"
     "dest": "build/assets/img/"
 
 # compile scss
@@ -43,6 +45,18 @@ gulp.task 'style', ->
     .pipe(gulpif(argv.production, cssmin()))
     .pipe(gulp.dest(config.style.dest))
     .pipe connect.reload()
+
+gulp.task 'compass', ->
+  gulp.src(config.style.dest+'app.css', {read: false})
+    .pipe(grimraf({force: true}))
+
+  gulp.src(config.style.scss)
+    .pipe(compass({
+        css: config.style.dest,
+        sass: 'src/scss'
+      }))
+    .pipe(gulpif(argv.production, cssmin()))
+    .pipe(gulp.dest(config.style.dest))
 
 gulp.task 'style-base', ->
   gulp.src(config.style.base)
@@ -85,7 +99,7 @@ gulp.task 'base', ()->
 
 # watch
 gulp.task 'watch', ()->
-  gulp.watch config.src+'/**/*.scss', ['style']
+  gulp.watch config.src+'/**/*.scss', ['compass']
   gulp.watch config.src+'/**/*.coffee', ['js']
   gulp.watch config.templates.src, ['templates']
   gulp.watch config.index.src, ['index']
@@ -104,4 +118,4 @@ gulp.task "clean", ->
   rimraf config.build, ()->
 # build
 gulp.task "build", ->
-  gulp.start 'base', 'index', 'templates','style', 'js', 'images'
+  gulp.start 'base', 'index', 'templates','compass', 'js', 'images'

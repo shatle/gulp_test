@@ -25,16 +25,22 @@
 
 ## 依赖
 
-**sass**
+**compass**
 
 ```
-gem install sass
+gem install compass
 ```
 
 **gulp && coffee-script**
 
 ```
 npm install -g gulp coffee-script
+```
+
+如果出现 coffee-script 依赖错误，需要
+
+```
+npm install coffee-script --save-dev
 ```
 
 ## 命令

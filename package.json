@@ -18,6 +18,7 @@
     "gulp-uglifyjs": "",
     "gulp-util": "",
     "rimraf": "",
-    "yargs": ""
+    "yargs": "",
+    "gulp-compass": ""
   }
 }
