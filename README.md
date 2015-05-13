@@ -23,6 +23,20 @@
 |    |-- index.html 
 </pre>
 
+## 依赖
+
+**sass**
+
+```
+gem install sass
+```
+
+**gulp && coffee-script**
+
+```
+npm install -g gulp coffee-script
+```
+
 ## 命令
 
 `gulp` 直接监听build目录并建立服务，服务地址为 [http://127.0.0.1:8888](http://127.0.0.1:8888) ，更新自动刷新页面；
