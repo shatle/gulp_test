@@ -10,7 +10,6 @@ coffee = require 'gulp-coffee'
 util = require 'gulp-util'
 rimraf = require 'rimraf' # delete folder
 grimraf = require 'gulp-rimraf' # delete file
-clean = require 'gulp-clean'
 livereload = require 'gulp-livereload'
 connect = require 'gulp-connect'
 argv = require('yargs').argv
